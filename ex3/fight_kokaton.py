@@ -152,13 +152,11 @@ class Score:
         self.rct = self.img.get_rect()
         self.rct.topleft = (100, HEIGHT - 50)  # 画面の左下にスコアを配置
 
-    def update(self, screen: pg.Surface):
-        # スコアの表示を更新
+    def update(self, screen: pg.Surface):   # スコアの更新
         self.img = self.fonto.render(f"Score: {self.score}", True, self.color)
         screen.blit(self.img, self.rct)
 
-    def increase(self, amount=1):
-        # スコアを指定した値だけ増加
+    def increase(self, amount=1):   # スコアを指定した値だけ増加
         self.score += amount
  
 def main():
@@ -176,13 +174,11 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-            if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
-                # スペースキー押下でBeamクラスのインスタンス生成
+            if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:  # スペースキー押下でBeamクラスのインスタンス生成
                 beam = Beam(bird)            
         screen.blit(bg_img, [0, 0])
         for bomb in bombs:
-            if bird.rct.colliderect(bomb.rct):
-            # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
+            if bird.rct.colliderect(bomb.rct):  # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
                 bird.change_img(8, screen)
                 fonto = pg.font.Font(None, 80)
                 txt = fonto.render("Game Over", True, (255, 0, 0)) 
