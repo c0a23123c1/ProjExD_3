@@ -141,6 +141,24 @@ class Bomb:
         self.rct.move_ip(self.vx, self.vy)
         screen.blit(self.img, self.rct)
 
+    # class Score:
+    #     def init(self):
+    #         # フォントとスコアの初期設定
+    #         self.fonto = pg.font.SysFont("hgp創英角ﾎﾟｯﾌﾟ体", 30)
+    #         self.color = (0, 0, 255)  # スコアの表示色を青に設定
+    #         self.score = 0
+    #         self.img = self.fonto.render(f"Score: {self.score}", True, self.color)
+    #         self.rct = self.img.get_rect()
+    #         self.rct.topleft = (100, HEIGHT - 50)  # 画面の左下にスコアを配置
+
+    #     def update(self, screen: pg.Surface):
+    #         # スコアの表示を更新
+    #         self.img = self.fonto.render(f"Score: {self.score}", True, self.color)
+    #         screen.blit(self.img, self.rct)
+
+    #     def increase(self, amount=1):
+    #         # スコアを指定した値だけ増加
+    #         self.score += amount
 
 def main():
     pg.display.set_caption("たたかえ！こうかとん")
@@ -163,10 +181,13 @@ def main():
         for bomb in bombs:
             if bird.rct.colliderect(bomb.rct):
             # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
-            bird.change_img(8, screen)
-            pg.display.update()
-            time.sleep(1)
-            return
+                bird.change_img(8, screen)
+                fonto = pg.font.Font(None, 80)
+                txt = fonto.render("Game Over", True, (255, 0, 0)) 
+                screen.blit(txt, [WIDTH//2-150, HEIGHT//2])
+                pg.display.update()
+                time.sleep(1)
+                return
          
         if bomb is not None:
             if beam is not None:
